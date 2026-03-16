@@ -175,6 +175,7 @@ export type e_linter_general = {
     
 export type e_linter_vhdlls = {
     standard : e_linter_vhdlls_standard,
+    case     : e_formatter_standalone_keyword_case,
     ignoreVunit : boolean,
     vunitPath : string,
 };
@@ -1065,6 +1066,7 @@ export function get_default_config(): e_config {
             },
             vhdlls: {
                 standard : e_linter_vhdlls_standard.v2008,
+                case : e_formatter_standalone_keyword_case.lowercase,
                 ignoreVunit : false,
                 vunitPath : "",
             },
@@ -2127,6 +2129,19 @@ export function get_config_from_json(json_config: any): e_config {
     }
     if ( current_value_52 === "v2019"){
         default_config['linter']['vhdlls']['standard'] = e_linter_vhdlls_standard.v2019;
+    }
+
+    // linter -> vhdlls -> case
+    let current_value_52b = undefined;
+    try {
+        current_value_52b = json_config['linter']['vhdlls']['case'];
+    }
+    catch(e){}
+    if ( current_value_52b === "lowercase"){
+        default_config['linter']['vhdlls']['case'] = e_formatter_standalone_keyword_case.lowercase;
+    }
+    if ( current_value_52b === "uppercase"){
+        default_config['linter']['vhdlls']['case'] = e_formatter_standalone_keyword_case.uppercase;
     }
             
     // linter -> vhdlls -> ignoreVunit

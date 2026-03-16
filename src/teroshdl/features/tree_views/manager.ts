@@ -145,7 +145,7 @@ export function forceRefresh(rustHDLFilePath: string, veribleLSFilePath: string)
 
     try {
         const hdlVersion = utils.getConfig(multi_manager).linter.vhdlls.standard.replace('v', '');
-
+        const vhdlCase   = utils.getConfig(multi_manager).linter.vhdlls.case;
         const ignoreVunit = utils.getConfig(multi_manager).linter.vhdlls.ignoreVunit;
         const vunitPath = utils.getConfig(multi_manager).linter.vhdlls.vunitPath;
 
@@ -160,7 +160,7 @@ export function forceRefresh(rustHDLFilePath: string, veribleLSFilePath: string)
             }
         }
 
-        multi_manager.get_selected_project().save_toml(rustHDLFilePath, hdlVersion, ignoreVunit, vunitPath);
+        multi_manager.get_selected_project().save_toml(rustHDLFilePath, hdlVersion, vhdlCase, ignoreVunit, vunitPath);
 
         multi_manager
             .get_selected_project()

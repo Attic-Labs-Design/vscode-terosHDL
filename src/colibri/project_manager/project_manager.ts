@@ -631,8 +631,9 @@ export class Project_manager extends ConfigManager {
         file_utils.save_file_sync(output_path, edam_yaml);
     }
 
-    public save_toml(output_path: string, hdlVersion: string, ignoreVunit: boolean, vunitPath: string) {
+    public save_toml(output_path: string, hdlVersion: string, vhdlCase: string, ignoreVunit: boolean, vunitPath: string) {
         let initString = `standard = "${hdlVersion}"\n`;
+        initString += `type_case = "${vhdlCase === 'uppercase' ? 'upper' : 'lower'}"\n`;
 
         let endString = "\n\n";
         if (vunitPath !== "") {
