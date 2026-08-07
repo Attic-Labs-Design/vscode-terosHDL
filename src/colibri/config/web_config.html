@@ -1632,7 +1632,19 @@ body.vscode-high-contrast {
                             </select>
                         </div>
                     </div>
-                  
+                    
+                    <div class="setting-item">
+                        <div class="setting-item-label">
+                            Pick whether VHDL types are uppercase or lowercase
+                            <span class="markConfig" id="mark_linter-vhdlls-case"></span>
+                        </div>
+                        <div class="select-container">
+                            <select class="setting-select-box" id="linter-vhdlls-case">
+                                      <option value='lowercase'>lower</option>
+                                      <option value='uppercase'>upper</option>
+                            </select>
+                        </div>
+                    </div>
                   
                     <div class="setting-item">
                         <div class="setting-checkbox">
@@ -5901,6 +5913,8 @@ body.vscode-high-contrast {
     config["linter"]["vhdlls"] = {}
     element_value = document.getElementById("linter-vhdlls-standard").value;
     config["linter"]["vhdlls"]["standard"] = element_value
+    element_value = document.getElementById("linter-vhdlls-case").value;
+    config["linter"]["vhdlls"]["case"] = element_value
     element_value = document.getElementById("linter-vhdlls-ignoreVunit").checked;
     config["linter"]["vhdlls"]["ignoreVunit"] = element_value
     element_value = document.getElementById("linter-vhdlls-vunitPath").value;
@@ -6900,6 +6914,9 @@ body.vscode-high-contrast {
     }
     if (config["linter"] && config["linter"]["vhdlls"] && config["linter"]["vhdlls"]["standard"] !== undefined) {
         document.getElementById("linter-vhdlls-standard").value = config["linter"]["vhdlls"]["standard"];
+    }
+    if (config["linter"] && config["linter"]["vhdlls"] && config["linter"]["vhdlls"]["case"] !== undefined) {
+        document.getElementById("linter-vhdlls-case").value = config["linter"]["vhdlls"]["case"];
     }
     if (config["linter"] && config["linter"]["vhdlls"] && config["linter"]["vhdlls"]["ignoreVunit"] !== undefined) {
         document.getElementById("linter-vhdlls-ignoreVunit").checked = config["linter"]["vhdlls"]["ignoreVunit"];
@@ -8035,6 +8052,11 @@ body.vscode-high-contrast {
       mark = MODIFIEDMSG;
     }
     document.getElementById("mark_linter-vhdlls-standard").innerHTML = mark;
+    mark = "";
+    if (projectName !== undefined && config["linter"] && config["linter"]["vhdlls"] && config["linter"]["vhdlls"]["case"] !== undefined) {
+        mark = MODIFIEDMSG;
+    }
+    document.getElementById("mark_linter-vhdlls-case").innerHTML = mark;
     mark = "";
     if (projectName !== undefined && config["linter"] && config["linter"]["vhdlls"] && config["linter"]["vhdlls"]["ignoreVunit"] !== undefined) {
       mark = MODIFIEDMSG;
